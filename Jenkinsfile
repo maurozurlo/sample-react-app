@@ -21,9 +21,16 @@ pipeline {
                 script {
                     def maintenanceMode = params.MAINTENANCE_MODE ? 'true' : 'false'
                     sh "echo VITE_MAINTENANCE_MODE=${maintenanceMode} > .env"
-                    jsonfile = readJSON file: 'src/env.json'
+                    
+                    // Read the JSON file
+                    def jsonfile = readJSON file: 'src/env.json'
+
+                    // Modify the JSON content
                     jsonfile['type'] = 'man'
+
+                    // Write the modified JSON back
                     writeJSON file: 'src/env.json', json: jsonfile
+                }
             }
         }
 
