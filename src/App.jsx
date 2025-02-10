@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import env from './env.json'
+
 import './App.css'
 
 const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
@@ -8,9 +10,12 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={isMaintenanceMode ? <Maintenance /> : <Home />} />
-      </Routes>
+      <>
+        <header>{env.type}</header>
+        <Routes>
+          <Route path="/" element={isMaintenanceMode ? <Maintenance /> : <Home />} />
+        </Routes>
+      </>
     </Router>
   );
 }
